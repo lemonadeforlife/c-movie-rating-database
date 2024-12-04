@@ -30,7 +30,8 @@ int main(){
                 scanf("%f", &myMovie.rating);
                 add(myMovie.title,myMovie.director,myMovie.release_year,myMovie.rating);
             } else if(choice==2){
-                continue;
+                clear();
+                display();
             } else if(choice==3){
                 continue;
             } else if(choice>=40){
