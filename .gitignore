@@ -1,4 +1,6 @@
 *.exe
 .vscode
 null
-test.c
+test*.c
+*.txt
+!film.txt

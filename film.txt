@@ -1,2 +1,4 @@
 3 Idiots;Rajkumar Hirani;2009;8.4
 Interstellar;Christopher Nolan;2014;8.7
+Spider-Man;Donald Trump;2000;7.4
+The Dark Knight Rises;Christopher Nolan;8;8.0
