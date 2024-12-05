@@ -33,7 +33,6 @@
 #define CYNB "\e[46m"
 #define WHTB "\e[47m"
 
-//High intensty background 
 #define BLKHB "\e[0;100m"
 #define REDHB "\e[0;101m"
 #define GRNHB "\e[0;102m"
@@ -54,7 +53,7 @@ struct movie
 
 // utilities
 
-// clear Terminal cuffer or screen
+// clear Terminal buffer or screen
 void clear(){
     system("@cls||clear");
 }
@@ -80,7 +79,7 @@ void menu(char *path){
     "[0] Exit\n\n"
     BGRN "GroupSeven@CSE114" RESET
     BWHT ":" RESET
-    YEL "(%s)" RESET
+    BYEL "(%s)" RESET
     BWHT "$ " RESET;
     printf(menu, path);
 }
@@ -88,14 +87,14 @@ void menu(char *path){
 void search_menu(char *path){
     char menu[] = "\n[1] Add Movie\n"
     "[2] Display Movie\n"
-    GRN "[3] Search Movie [*]\n" RESET
+    BGRN "[3] Search Movie [*]\n" RESET
     "\t[1] Title\n\t[2] Director\n"
     "[4] Update Movie Details\n"
     "\t[1] Title\n\t[2] Director\n\t[3] Release Year\n\t[4] Rating\n"
     "[0] Exit\n\n"
     BGRN "GroupSeven@CSE114" RESET
     BWHT ":" RESET
-    YEL "(%s)" RESET
+    BYEL "(%s)" RESET
     BWHT "$ " RESET;
     printf(menu, path);
 }
@@ -105,12 +104,12 @@ void update_menu(char *path){
     "[2] Display Movie\n"
     "[3] Search Movie\n"
     "\t[1] Title\n\t[2] Director\n"
-    GRN "[4] Update Movie Details [*]\n" RESET
+    BGRN "[4] Update Movie Details [*]\n" RESET
     "\t[1] Title\n\t[2] Director\n\t[3] Release Year\n\t[4] Rating\n"
     "[0] Exit\n\n"
     BGRN "GroupSeven@CSE114" RESET
     BWHT ":" RESET
-    YEL "(%s)" RESET
+    BYEL "(%s)" RESET
     BWHT "$ " RESET;
     printf(menu, path);
 }
@@ -118,18 +117,17 @@ void update_menu(char *path){
 // Functionalities
 
 void add(char title[100],char dir[50],int year,float rating){
-    char result[1000];
-    FILE *file; char data [1000];
+    char result[200];
+    FILE *file;
     snprintf(result,sizeof(result),"%s;%s;%d;%.1f",title,dir,year,rating);
     file = fopen("film.txt", "a+");
     fputs(result,file);
     fclose(file);
-    printf("%s has successfully added to Database\n", title);
+    printf(BYEL"%s" RESET " has successfully added to Database\n", title);
 }
 void parse_print(char *line,int mode){
     char *title, *director;
-    int year;
-    float rating;
+    int year; float rating;
     title = strtok(line, ";");
     director = strtok(NULL, ";");
     sscanf(strtok(NULL, ";"), "%d", &year);

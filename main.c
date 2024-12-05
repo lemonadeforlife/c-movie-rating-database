@@ -1,15 +1,16 @@
 #include "utils.c"
 
 int main(){
-    char dir[1024];
+    char dir[200];
     getcwd(dir,sizeof(dir));
     int choice;
     while(1){
+        fflush(stdin);
         clear();
         menu(dir);
         int input = scanf("%d", &choice);
         if(input==EOF){
-            printf("\nBye :)\n");
+            printf("\n\nBye :)\n");
             exit(0);
         } else if(input!=1){
             printf("Invalid Input\n");
@@ -43,45 +44,44 @@ int main(){
                 clear();
                 search_menu(dir);
                 int search_option;
-                scanf("%d", &search_option);
-                if(search_option==1){
-                    clear();
-                    search(search_option); // title
+                int search_input = scanf("%d", &search_option);
+                if (search_input!=1||search_option>2){
+                    printf("Invalid option\n");
                     pause();
-                } else if(search_option==2){
-                    clear();
-                    search(search_option); // director
-                    pause();
-                } else if(search_option==0){
-                    printf("\nBye :)\n");
-                    exit(0);
                 } else {
-                    printf("Invalid Option\n");
-                    pause();
+                    clear();
+                    if(search_option==1){
+                        search(search_option); // title
+                    } else if(search_option==2){
+                        search(search_option); // director
+                    } else if(search_option==0||search_input==EOF){
+                        printf("\nBye :)\n");
+                        exit(0);
+                    }
                 }
             } else if(choice==4){ // Update Menu
                 clear();
                 update_menu(dir);
                 int search_option;
-                scanf("%d", &search_option);
-                if(search_option>0&&search_option<5){
+                int search_input = scanf("%d", &search_option);
+                if(search_input!=1||search_option>4){
+                    printf("Invalid option\n");
+                    fflush(stdin);
+                } else if(search_option>0&&search_option<5){
                     clear();
                     update(search_option);
                 } else if(search_option==0){
                     printf("\nBye :)\n");
                     exit(0);
-                } else {
-                    printf("Invalid Option\n");
                 }
                 pause();
             } else if(choice>30&&choice<33){
                 if(choice==31){
                     search(1);
-                    pause();
                 } else if(choice==32){
                     search(2);
-                    pause();
                 }
+                pause();
             } else if(choice>40&&choice<45){
                 clear();
                 switch(choice){
